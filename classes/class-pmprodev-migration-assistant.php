@@ -429,6 +429,11 @@ class PMProDev_Migration_Assistant {
 	private static function helper_get_export_data( $option_names_to_export ) {
 		global $wpdb;
 
+		// Bail if there are no options to export.
+		if ( empty( $option_names_to_export ) ) {
+			return array();
+		}
+
 		// Get all advanced settings data from options table.
 		$placeholders = implode( ', ', array_fill( 0, count( $option_names_to_export ), '%s' ) );
 		$option_data  = $wpdb->get_results( $wpdb->prepare( "SELECT option_name, option_value FROM $wpdb->options WHERE option_name IN ($placeholders)", $option_names_to_export ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- One-off export query; $placeholders is a list of %s placeholders, one per option name.
