@@ -248,13 +248,13 @@ function pmprodev_checkout_debug_email( $filter_contents = null ) {
 	$email->body     = file_get_contents( plugin_dir_path( __FILE__ ) . '/email/checkout_debug.html' );
 	$email->data     = array(
 		'sitename'     => get_bloginfo( 'sitename' ),
-		'checkout_url' => $http . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+		'checkout_url' => esc_html( $http . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ),
 		'submit'       => ( empty( $_REQUEST['submit-checkout'] ) ? 'no' : 'yes' ),
-		'level'        => print_r( $level, true ),
-		'user'         => print_r( $current_user->data, true ),
-		'request'      => print_r( $_REQUEST, true ),
-		'message_type' => ( empty( $pmpro_msgt ) ? 'N/A' : $pmpro_msgt . '|' ),
-		'message'      => $pmpro_msg,
+		'level'        => esc_html( wp_check_invalid_utf8( print_r( $level, true ), true ) ),
+		'user'         => esc_html( wp_check_invalid_utf8( print_r( $current_user->data, true ), true ) ),
+		'request'      => esc_html( wp_check_invalid_utf8( print_r( $_REQUEST, true ), true ) ),
+		'message_type' => ( empty( $pmpro_msgt ) ? 'N/A' : esc_html( $pmpro_msgt ) . '|' ),
+		'message'      => esc_html( $pmpro_msg ),
 	);
 
 	// Add passwords back, just in case.
@@ -272,7 +272,7 @@ function pmprodev_checkout_debug_email( $filter_contents = null ) {
 	$order->getLastMemberOrder( $current_user->user_id );
 
 	if ( ! empty( $order ) ) {
-		$email->data['order'] = print_r( $order, true );
+		$email->data['order'] = esc_html( wp_check_invalid_utf8( print_r( $order, true ), true ) );
 	}
 
 	$email->sendEmail();
