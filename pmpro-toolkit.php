@@ -250,9 +250,9 @@ function pmprodev_checkout_debug_email( $filter_contents = null ) {
 		'sitename'     => get_bloginfo( 'sitename' ),
 		'checkout_url' => esc_html( $http . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ),
 		'submit'       => ( empty( $_REQUEST['submit-checkout'] ) ? 'no' : 'yes' ),
-		'level'        => esc_html( print_r( $level, true ) ),
-		'user'         => esc_html( print_r( $current_user->data, true ) ),
-		'request'      => esc_html( print_r( $_REQUEST, true ) ),
+		'level'        => esc_html( wp_check_invalid_utf8( print_r( $level, true ), true ) ),
+		'user'         => esc_html( wp_check_invalid_utf8( print_r( $current_user->data, true ), true ) ),
+		'request'      => esc_html( wp_check_invalid_utf8( print_r( $_REQUEST, true ), true ) ),
 		'message_type' => ( empty( $pmpro_msgt ) ? 'N/A' : esc_html( $pmpro_msgt ) . '|' ),
 		'message'      => esc_html( $pmpro_msg ),
 	);
@@ -272,7 +272,7 @@ function pmprodev_checkout_debug_email( $filter_contents = null ) {
 	$order->getLastMemberOrder( $current_user->user_id );
 
 	if ( ! empty( $order ) ) {
-		$email->data['order'] = esc_html( print_r( $order, true ) );
+		$email->data['order'] = esc_html( wp_check_invalid_utf8( print_r( $order, true ), true ) );
 	}
 
 	$email->sendEmail();
