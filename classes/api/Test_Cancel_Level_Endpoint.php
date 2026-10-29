@@ -86,6 +86,15 @@ class Test_Cancel_Level_Endpoint extends API_Endpoint {
 		$level_id = intval( $params['membership_level'] ?? 1 );
 		$cleanup  = ! empty( $params['cleanup'] );
 
+		// Restoring a level skips checkout and payment, so only admins may request cleanup.
+		if ( $cleanup && ! current_user_can( 'manage_options' ) ) {
+			return $this->json_error(
+				'cleanup_not_allowed',
+				'Only administrators can restore a membership level after this test.',
+				403
+			);
+		}
+
 		// Cancel the membership level
 		$cancelled = false;
 		if ( function_exists( 'pmpro_cancelMembershipLevel' ) ) {
