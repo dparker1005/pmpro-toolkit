@@ -75,7 +75,7 @@ class Test_Change_Level_Endpoint extends API_Endpoint {
 			return $this->json_error(
 				'method_not_allowed',
 				'The ' . $method . ' method is not allowed for this endpoint. Please adjust your toolkit settings.',
-				array( 'status' => 405 )
+				405
 			);
 		}
 

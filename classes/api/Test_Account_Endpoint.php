@@ -44,7 +44,7 @@ class Test_Account_Endpoint extends API_Endpoint {
 			return $this->json_error(
 				'method_not_allowed',
 				'The ' . $method . ' method is not allowed for this endpoint. Please adjust your toolkit settings.',
-				array( 'status' => 405 )
+				405
 			);
 		}
 
@@ -60,7 +60,7 @@ class Test_Account_Endpoint extends API_Endpoint {
 			return $this->json_error(
 				'not_logged_in',
 				'You must be logged in to perform this test.',
-				array( 'status' => 401 )
+				401
 			);
 		}
 
