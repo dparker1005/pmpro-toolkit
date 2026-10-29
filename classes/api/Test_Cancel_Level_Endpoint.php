@@ -40,6 +40,8 @@ class Test_Cancel_Level_Endpoint extends API_Endpoint {
 	 * Request Parameters:
 	 * - membership_level (int, required): The membership level ID to cancel.
 	 * - cleanup (bool, optional): If true, restores the user’s original membership level after test (default: false).
+	 *   Administrators only; other users get a 403. Restores the level only, not the cancelled gateway subscription
+	 *   or billing terms, so use it on test accounts.
 	 *
 	 * Example payload:
 	 * {

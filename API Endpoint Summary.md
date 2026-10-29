@@ -141,7 +141,7 @@ This makes it easy to measure performance consistently across endpoints.
 
 **Request Parameters:**
 - `membership_level` (int, required): Level ID to cancel
-- `cleanup` (bool, optional): Restores user's membership level after test (default: false). Administrators only; other users get a 403.
+- `cleanup` (bool, optional): Restores user's membership level after test (default: false). Administrators only; other users get a 403. Restores the level only, not the cancelled gateway subscription or billing terms, so use it on test accounts.
 
 ---
 

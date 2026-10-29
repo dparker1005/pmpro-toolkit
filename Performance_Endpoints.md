@@ -155,6 +155,6 @@ All endpoints use the [`PerformanceTrackingTrait`](classes/traits/Performance_Tr
 
 - **test-checkout**: Can generate test users with cleanup option
 - **test-change-level**: Requires existing user, supports cleanup to restore original level
-- **test-cancel-level**: Requires authentication, supports cleanup to restore membership
+- **test-cancel-level**: Requires authentication, supports cleanup to restore membership (administrators only; restores the level but not the gateway subscription or billing, so use test accounts)
 - **test-report**: Generates PMPro admin reports (sales, memberships, login)
 - **test-member-export**: Simulates member CSV export with filtering options
